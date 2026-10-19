@@ -539,42 +539,23 @@ document.getElementById("f-copy").addEventListener("click", async () => {
   catch { const r = document.createRange(); r.selectNodeContents(copybox); const s = getSelection(); s.removeAllRanges(); s.addRange(r); show("Your answers are selected below. Copy them and send them to Steven.", "info"); }
 });
 
-// ---- Google Form + Sheet wiring (fill these in) ----
-const CONFIG = {
-  formAction: "", // https://docs.google.com/forms/d/e/<id>/formResponse
-  entries: { name: "", status: "", count: "", from: "", tier: "", bangkok: "", flex: "", activities: "", notes: "" },
-  boardCsv: "",   // published CSV of the Board tab
-};
-// Page answers -> exact option text in the Google Form
-const FORM_TEXT = {
-  status: { Yes: "Yes, count me in", Maybe: "Maybe", No: "Not this time" },
-  tier: { "Mid-range": "Mid-range", Premium: "Premium (up to US$300)", Either: "Either is fine" },
-  bangkok: { Yes: "Yes", No: "Chiang Mai only", "Not sure": "Not sure" },
-  from: { "Auckland": "Auckland", "Sydney": "Sydney", "Hawaii (Honolulu)": "Hawaii", "California (LA / SF)": "California", "Maryland (BWI / IAD)": "Maryland", "Somewhere else": "Somewhere else" },
-};
-const ready = () => CONFIG.formAction && CONFIG.entries.name;
+// ---- Google Sheet wiring: paste the Apps Script web app URL here ----
+const ENDPOINT = "";
+const ready = () => !!ENDPOINT;
+let myId = "";
+try { myId = localStorage.getItem("tt27-id") || ""; if (!myId) { myId = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem("tt27-id", myId); } } catch { myId = Math.random().toString(36).slice(2); }
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
   const d = collect();
   if (!d.name || !d.status) { show("Please add your name and whether you're coming.", "info"); return; }
   if (!ready()) { show("Saving isn't switched on yet. Tap Copy my answers and send them to Steven.", "info"); return; }
-  const body = new URLSearchParams();
-  const put = (k, v) => { if (CONFIG.entries[k] && v !== "" && v != null) body.append(CONFIG.entries[k], v); };
-  put("name", d.name);
-  put("status", FORM_TEXT.status[d.status] || d.status);
-  put("count", String(d.count || 1));
-  put("from", FORM_TEXT.from[d.from] || d.from);
-  put("tier", FORM_TEXT.tier[d.tier] || d.tier);
-  put("bangkok", FORM_TEXT.bangkok[d.bangkok] || d.bangkok);
-  put("flex", d.flex);
-  d.activities.forEach(a => put("activities", a));
-  put("notes", d.notes);
   const btn = document.getElementById("f-submit"); btn.disabled = true;
   try {
-    await fetch(CONFIG.formAction, { method: "POST", mode: "no-cors", body });
-    show("Saved. Thanks! You'll pop up on the board in a few minutes. Changed your mind? Just send it again and Steven will use your latest answer.", "ok");
+    await fetch(ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ ...d, id: myId, count: d.count || 1 }) });
+    show("Saved. Thanks! You'll pop up on the board in a moment. Changed your mind? Edit your answers here and save again.", "ok");
     try { localStorage.setItem("tt27-answers", JSON.stringify(d)); } catch {}
+    setTimeout(loadBoard, 2500);
   } catch {
     show("That didn't go through. Check your connection and try again, or tap Copy my answers and send them to Steven.", "info");
   } finally { btn.disabled = false; }
@@ -582,19 +563,6 @@ form.addEventListener("submit", async e => {
 try { const saved = JSON.parse(localStorage.getItem("tt27-answers") || "null"); if (saved) fill(saved); } catch {}
 
 function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
-function parseCsv(t) {
-  const rows = []; let row = [], f = "", q = false;
-  for (let i = 0; i < t.length; i++) {
-    const c = t[i];
-    if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
-    else if (c === '"') q = true;
-    else if (c === ",") { row.push(f); f = ""; }
-    else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; }
-    else f += c;
-  }
-  if (f || row.length) { row.push(f); rows.push(row); }
-  return rows;
-}
 const statusKey = s => /^yes/i.test(s) ? "yes" : /^maybe/i.test(s) ? "maybe" : "no";
 function renderBoard(rows) {
   const sum = k => rows.filter(r => statusKey(r.status) === k).reduce((a, r) => a + (Number(r.count) || 1), 0);
@@ -610,17 +578,14 @@ function renderBoard(rows) {
   }</tbody></table></div>`;
 }
 async function loadBoard() {
-  if (!CONFIG.boardCsv) return;
+  if (!ENDPOINT) return;
   try {
-    const res = await fetch(CONFIG.boardCsv + (CONFIG.boardCsv.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
-    const [head, ...data] = parseCsv(await res.text());
-    const rows = data.filter(r => r.some(x => x.trim())).map(r => ({
-      name: (r[0] || "").trim().split(/\s+/)[0], status: r[1] || "", count: r[2], from: r[3],
-    })).filter(r => r.name);
-    renderBoard(rows);
+    const res = await fetch(ENDPOINT + "?t=" + Date.now());
+    const { rows = [] } = await res.json();
+    renderBoard(rows.map(r => ({ ...r, name: String(r.name || "").trim().split(/\s+/)[0] })).filter(r => r.name));
   } catch {}
 }
-loadBoard(); setInterval(loadBoard, 120000);
+loadBoard(); setInterval(loadBoard, 60000);
 
 // Lantern sky
 (() => {
