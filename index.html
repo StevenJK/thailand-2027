@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tanguilig Thailand 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one long scroll, a lantern-lit hero, then decision sections on a teak-and-paper ground */
+:root {
+  --bg: #f6f3ec;
+  --surface: #ffffff;
+  --ink: #1d2a24;
+  --muted: #5d6a63;
+  --line: #dcd6c8;
+  --jungle: #1f4d3d;
+  --marigold: #e39b1b;
+  --marigold-soft: #fbecc9;
+  --good: #2f7a4f;
+  --warn: #b7791f;
+  --bad: #a3433a;
+  --hero-bg: #13261f;
+  --hero-ink: #f6efdc;
+  --display: "Gloock", Georgia, "Times New Roman", serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111915; --surface: #18231e; --ink: #ece7da; --muted: #a2ada6; --line: #2c3a33;
+    --jungle: #7cc3a4; --marigold: #f0b04a; --marigold-soft: #3a2f17;
+    --good: #6fc292; --warn: #e3b05a; --bad: #e08a80; --hero-bg: #0b1511; --hero-ink: #f6efdc;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111915; --surface: #18231e; --ink: #ece7da; --muted: #a2ada6; --line: #2c3a33;
+  --jungle: #7cc3a4; --marigold: #f0b04a; --marigold-soft: #3a2f17;
+  --good: #6fc292; --warn: #e3b05a; --bad: #e08a80; --hero-bg: #0b1511; --hero-ink: #f6efdc;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.12; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+h3 { font-size: 1.3rem; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--jungle); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+.sec-head p { color: var(--muted); }
+
+/* Hero */
+.hero { background: var(--hero-bg); color: var(--hero-ink); position: relative; overflow: hidden; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero .wrap { position: relative; padding-block: 72px 56px; display: grid; gap: 22px; }
+.hero .eyebrow { color: #f0b04a; }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 5.2rem); }
+.hero h1 em { font-style: normal; color: #f0b04a; }
+.hero p.lede { font-size: 1.15rem; color: #d9d2bf; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: rgba(246,239,220,.18); border: 1px solid rgba(246,239,220,.18); border-radius: 10px; overflow: hidden; margin-top: 12px; }
+.facts div { background: rgba(11,21,17,.72); padding: 14px 16px; display: grid; gap: 2px; }
+.facts b { font-family: var(--display); font-weight: 400; font-size: 1.6rem; color: #fff6e0; }
+.facts span { font-size: .82rem; color: #bfb8a4; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.btn { appearance: none; border: 0; border-radius: 999px; padding: 11px 20px; font: 600 .95rem var(--body); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--marigold); color: #1d1606; }
+.btn-ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--marigold); outline-offset: 2px; }
+
+/* Why */
+.why { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
+.why ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.why li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; }
+.why li i { font-style: normal; color: var(--marigold); font-family: var(--display); font-size: 1.4rem; line-height: 1.1; }
+.who { display: grid; gap: 8px; }
+.who-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+.who-row span:last-child { color: var(--muted); text-align: right; }
+
+/* Itinerary */
+.days { display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
+.day { display: grid; grid-template-columns: 112px 1fr; gap: 18px; padding: 14px 0 14px 22px; position: relative; }
+.day::before { content: ""; position: absolute; left: -7px; top: 22px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--jungle); }
+.day.big::before { background: var(--marigold); border-color: var(--marigold); width: 16px; height: 16px; left: -9px; top: 20px; }
+.day .d { font-family: var(--mono); font-size: .85rem; color: var(--muted); padding-top: 3px; }
+.day .d b { display: block; color: var(--ink); font-size: .95rem; }
+.day h3 { font-size: 1.15rem; font-family: var(--body); font-weight: 600; }
+.day p { color: var(--muted); font-size: .95rem; }
+.city { display: inline-block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: 2px; }
+.city.cm { background: var(--marigold-soft); color: var(--warn); }
+.city.bk { background: color-mix(in srgb, var(--jungle) 16%, transparent); color: var(--jungle); }
+.note { margin-top: 18px; padding: 12px 16px; border-radius: 8px; background: var(--marigold-soft); font-size: .92rem; }
+
+/* Stays */
+.stays { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.stay { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+.stay.pick { border-color: var(--marigold); box-shadow: 0 0 0 2px var(--marigold); }
+.stay-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.tag { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.pick-badge { background: var(--marigold); color: #1d1606; border-radius: 999px; padding: 2px 10px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tier { border-radius: 8px; padding: 10px 12px; background: var(--bg); display: grid; gap: 2px; }
+.tier small { font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.tier b { font-weight: 600; font-size: .95rem; }
+.tier .num { font-size: .85rem; color: var(--jungle); }
+.pros { font-size: .92rem; color: var(--muted); display: grid; gap: 4px; }
+.pros span::before { content: "+ "; color: var(--good); font-weight: 700; }
+.stay h3 a, .day a, .note a { color: inherit; text-decoration: underline; text-decoration-color: var(--marigold); text-underline-offset: 3px; }
+.site { font-size: .9rem; font-weight: 600; color: var(--jungle); text-decoration: none; }
+.site:hover { text-decoration: underline; }
+.pros span.con::before { content: "– "; color: var(--bad); }
+.bkk { margin-top: 16px; }
+
+/* Costs */
+.calc { display: grid; grid-template-columns: 320px 1fr; gap: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.field { display: grid; gap: 6px; }
+.field label, .field legend { font-size: .85rem; font-weight: 600; }
+select, input[type=text], input[type=number], textarea { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%; }
+textarea { min-height: 80px; resize: vertical; }
+.calc-controls { display: grid; gap: 16px; align-content: start; }
+.seg { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { flex: 1; border: 0; background: var(--bg); color: var(--ink); font: 500 .9rem var(--body); padding: 9px 6px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--jungle); color: var(--bg); }
+.total { display: grid; gap: 4px; }
+.total .big { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1; }
+.total .usd { color: var(--muted); }
+.bars { display: grid; gap: 10px; margin-top: 18px; }
+.bar-row { display: grid; grid-template-columns: 120px 1fr 120px; gap: 10px; align-items: center; font-size: .9rem; }
+.bar-track { height: 12px; background: var(--bg); border-radius: 6px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; }
+.bar-row .num { text-align: right; font-size: .85rem; }
+.table-wrap { overflow-x: auto; margin-top: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num, th.r { text-align: right; }
+tr:last-child td { border-bottom: 0; }
+.small { font-size: .85rem; color: var(--muted); }
+
+/* Survey */
+.survey { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+form { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 16px; min-width: 0; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips label { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: .9rem; cursor: pointer; background: var(--bg); }
+.chips input { accent-color: var(--jungle); margin: 0; }
+.chips label:has(input:checked) { border-color: var(--jungle); background: color-mix(in srgb, var(--jungle) 12%, var(--bg)); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.msg { font-size: .92rem; padding: 10px 12px; border-radius: 8px; }
+.msg.ok { background: color-mix(in srgb, var(--good) 14%, transparent); color: var(--good); }
+.msg.info { background: var(--marigold-soft); }
+.board { display: grid; gap: 14px; min-width: 0; }
+.tally { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tally div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; }
+.tally b { font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1.1; }
+.tally span { font-size: .8rem; color: var(--muted); }
+.pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+.pill.yes { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.pill.maybe { background: var(--marigold-soft); color: var(--warn); }
+.pill.no { background: color-mix(in srgb, var(--bad) 15%, transparent); color: var(--bad); }
+.empty { padding: 22px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; }
+.copybox { white-space: pre-wrap; font-family: var(--mono); font-size: .8rem; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 240px; overflow: auto; }
+footer { padding-block: 32px 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+footer ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+footer a { color: var(--jungle); }
+
+@media (max-width: 820px) {
+  .why, .calc, .survey, .stays { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .day { grid-template-columns: 1fr; gap: 4px; }
+  .tiers, .row2 { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 92px 1fr 92px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <canvas id="lanterns" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Tanguilig family reunion · December 2027</div>
+    <h1>Twenty-plus of us.<br>One marathon.<br><em>Christmas in Thailand.</em></h1>
+    <p class="lede">Steven and Pearl are running the Chiang Mai Marathon in December 2027. We'd love to turn it into the trip where the whole family finally ends up in the same place, flying in from Auckland, Sydney, Hawaii, California and Maryland. This page has the plan, what it costs, and a short survey at the bottom. Please fill it in.</p>
+    <div class="facts">
+      <div><b class="num">20+</b><span>of us, plus anyone you bring</span></div>
+      <div><b>10 nights</b><span>16 to 26 Dec 2027 (draft)</span></div>
+      <div><b>2 cities</b><span>Chiang Mai, then Bangkok</span></div>
+      <div><b>1 race</b><span>with the whole family at the finish line</span></div>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#survey">Answer the survey</a>
+      <a class="btn btn-ghost" href="#costs">What will it cost me?</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="why">
+    <div class="wrap why">
+      <div class="sec-head">
+        <div class="eyebrow">Why this trip</div>
+        <h2>We haven't all been in one place for years. This is the excuse.</h2>
+        <p>Northern Thailand in December is cool, dry and lit up. Chiang Mai is relaxed, cheap to eat well in, and easy to move a big group around. Then Bangkok for Christmas on the river.</p>
+      </div>
+      <ul>
+        <li><i>1</i><div><b>A finish line to cheer at.</b> The marathon starts before dawn. Everyone else gets a lie-in, then meets the runners at the finish for breakfast.</div></li>
+        <li><i>2</i><div><b>Our own bungalows, one resort.</b> Each family gets its own villa or room. Pick a comfortable room or a pool villa, and we're still at the same pool.</div></li>
+        <li><i>3</i><div><b>Something for every age.</b> Cooking classes, an ethical elephant sanctuary, temples on the mountain, night markets, spa days, and Chiang Mai's craft cocktail bars for the uni crowd.</div></li>
+        <li><i>4</i><div><b>Christmas together in Bangkok.</b> A riverside hotel, a Christmas Eve dinner cruise and a long family lunch on the 25th.</div></li>
+      </ul>
+    </div>
+    <div class="wrap" style="margin-top:32px">
+      <div class="who">
+        <div class="eyebrow">Who we're hoping for</div>
+        <p class="small">Everyone's welcome: partners, kids, whoever makes it your trip. Every adult gets their own say, so please each fill in the survey yourself. There's no pressure to decide now.</p>
+        <div class="who-row"><span>Steven, Pearl and family</span><span>Auckland and Sydney</span></div>
+        <div class="who-row"><span>Terry, Rodney and family</span><span>Maryland, US East Coast</span></div>
+        <div class="who-row"><span>Cheryl, Michael and family</span><span>Hawaii</span></div>
+        <div class="who-row"><span>Reina, Darren and family</span><span>Hawaii</span></div>
+        <div class="who-row"><span>Ember, James and family</span><span>California</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Draft itinerary</div>
+        <h2>Ten nights: seven in Chiang Mai, three in Bangkok</h2>
+        <p>Built around a Sunday 19 December race. Every day after race day is optional. Do as much or as little as you like.</p>
+      </div>
+      <div class="days">
+        <div class="day"><div class="d"><b>Thu 16</b>Day 1</div><div><h3>Arrive Chiang Mai <span class="city cm">Chiang Mai</span></h3><p>Fly into Chiang Mai (CNX), usually via Bangkok, Singapore, Tokyo or Seoul. Check in, swim, then a welcome khantoke dinner with the whole family.</p></div></div>
+        <div class="day"><div class="d"><b>Fri 17</b>Day 2</div><div><h3>Old City and Doi Suthep <span class="city cm">Chiang Mai</span></h3><p>Temples inside the old walls in the morning, then the gold temple on <a href="https://en.wikipedia.org/wiki/Wat_Phra_That_Doi_Suthep" target="_blank" rel="noopener">Doi Suthep</a> mountain at sunset. Easy shake-out run for the runners.</p></div></div>
+        <div class="day"><div class="d"><b>Sat 18</b>Day 3</div><div><h3>Choose your day <span class="city cm">Chiang Mai</span></h3><p><a href="https://www.thaifarmcooking.com" target="_blank" rel="noopener">Thai cooking class at a farm</a>, or a day at <a href="https://www.elephantnaturepark.org" target="_blank" rel="noopener">Elephant Nature Park</a>, an ethical elephant sanctuary. Runners collect race bibs and have an early night.</p></div></div>
+        <div class="day big"><div class="d"><b>Sun 19</b>Day 4</div><div><h3>Race day <span class="city cm">Chiang Mai</span></h3><p><a href="https://www.chiangmaimarathon.com/" target="_blank" rel="noopener">Marathon</a> starts at 3am from Tha Phae Gate. Family cheer squad at the finish, then a big breakfast, massages all round, and a celebration dinner.</p></div></div>
+        <div class="day"><div class="d"><b>Mon 20</b>Day 5</div><div><h3>Pool and spa day <span class="city cm">Chiang Mai</span></h3><p>Recovery day at the resort. Nothing planned on purpose.</p></div></div>
+        <div class="day"><div class="d"><b>Tue 21</b>Day 6</div><div><h3>Big day trip <span class="city cm">Chiang Mai</span></h3><p><a href="https://en.wikipedia.org/wiki/Doi_Inthanon_National_Park" target="_blank" rel="noopener">Doi Inthanon</a>, Thailand's highest mountain, or the <a href="https://en.wikipedia.org/wiki/Wat_Rong_Khun" target="_blank" rel="noopener">White Temple</a> at Chiang Rai. Private vans for the group.</p></div></div>
+        <div class="day"><div class="d"><b>Wed 22</b>Day 7</div><div><h3>Markets and Nimman <span class="city cm">Chiang Mai</span></h3><p>Shopping, coffee, the <a href="https://en.wikipedia.org/wiki/Chiang_Mai_Night_Bazaar" target="_blank" rel="noopener">Night Bazaar</a>. Last night in the north.</p></div></div>
+        <div class="day"><div class="d"><b>Thu 23</b>Day 8</div><div><h3>Fly to Bangkok <span class="city bk">Bangkok</span></h3><p>About 70 minutes on a domestic flight. Check in on the river, longtail boat through the canals at dusk.</p></div></div>
+        <div class="day"><div class="d"><b>Fri 24</b>Day 9</div><div><h3>Grand Palace and Christmas Eve <span class="city bk">Bangkok</span></h3><p><a href="https://www.royalgrandpalace.th/en/home" target="_blank" rel="noopener">Grand Palace</a>, <a href="https://en.wikipedia.org/wiki/Wat_Pho" target="_blank" rel="noopener">Wat Pho</a> and <a href="https://en.wikipedia.org/wiki/Wat_Arun" target="_blank" rel="noopener">Wat Arun</a> in the cooler morning. Christmas Eve dinner cruise on the Chao Phraya.</p></div></div>
+        <div class="day big"><div class="d"><b>Sat 25</b>Day 10</div><div><h3>Christmas Day <span class="city bk">Bangkok</span></h3><p>Long family lunch, pool time, then street food in <a href="https://en.wikipedia.org/wiki/Yaowarat_Road" target="_blank" rel="noopener">Chinatown</a> at night.</p></div></div>
+        <div class="day"><div class="d"><b>Sun 26</b>Day 11</div><div><h3>Fly home, or keep going <span class="city bk">Bangkok</span></h3><p>Head home, or add a few beach days in Hua Hin, Krabi or Phuket before New Year.</p></div></div>
+      </div>
+      <p class="note"><b>Dates aren't locked yet.</b> The race is usually on a Sunday in mid to late December (it was 21 December in 2025), and the <a href="https://www.chiangmaimarathon.com/" target="_blank" rel="noopener">organisers</a> haven't announced 2027 yet. If it lands on Sunday 12 December, the whole plan shifts a week earlier and Bangkok moves before Christmas. Please tell us in the survey how flexible you are.</p>
+    </div>
+  </section>
+
+  <section id="stay">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Where we'd stay</div>
+        <h2>Chiang Mai: four resorts, nothing over USD 300 a night</h2>
+        <p>Each option has a mid-range tier and a premium tier, capped at USD 300 per room per night. The only exception is a family villa with more than one bedroom. Prices are rough late-December rates per room or villa per night in USD. They'll move once we can book real dates.</p>
+      </div>
+      <div class="stays">
+        <article class="stay pick">
+          <div class="stay-top"><h3><a href="https://www.siripanna.com" target="_blank" rel="noopener">Siripanna Villa Resort</a></h3><span class="pick-badge">Our pick</span></div>
+          <div class="tag">One resort, both tiers · in the city, near the river and Night Bazaar</div>
+          <div class="tiers">
+            <div class="tier"><small>Mid-range</small><b>Deluxe room</b><span class="num">USD 115–160</span></div>
+            <div class="tier"><small>Premium</small><b>Pool villa</b><span class="num">USD 245–300</span></div>
+          </div>
+          <div class="pros"><span>Lanna-style villas around gardens, so it feels like our own village</span><span>Everyone fits under the cap, and race-morning transfers are short</span><span class="con">Family-size villas are limited, so we'd book early</span></div>
+        </article>
+        <article class="stay">
+          <div class="stay-top"><h3><a href="https://mgallery.accor.com/en/hotels/8154.html" target="_blank" rel="noopener">Veranda High Resort</a></h3><span class="tag">Hillside</span></div>
+          <div class="tag">One resort · Hang Dong hills, 25 min to the city</div>
+          <div class="tiers">
+            <div class="tier"><small>Mid-range</small><b>Deluxe room</b><span class="num">USD 160–230</span></div>
+            <div class="tier"><small>Family</small><b>2-bedroom pool villa</b><span class="num">USD 400–500</span></div>
+          </div>
+          <div class="pros"><span>Big infinity pool with mountain views, and the whole group on one property</span><span>The 2-bedroom villa works out under USD 250 per bedroom</span><span class="con">Out of town, so race morning and nights out need vans</span></div>
+        </article>
+        <article class="stay">
+          <div class="stay-top"><h3><a href="https://www.ratilannachiangmai.com" target="_blank" rel="noopener">Rati Lanna Riverside</a></h3><span class="tag">Best value</span></div>
+          <div class="tag">One resort, both tiers · on the Ping River, 10 min to the city</div>
+          <div class="tiers">
+            <div class="tier"><small>Mid-range</small><b>Deluxe room</b><span class="num">USD 100–160</span></div>
+            <div class="tier"><small>Premium</small><b>Lanna suite</b><span class="num">USD 200–280</span></div>
+          </div>
+          <div class="pros"><span>Riverside pool and teak buildings, with plenty of rooms for a big group</span><span>Lowest cost of the four</span><span class="con">Rooms and suites rather than separate bungalows</span></div>
+        </article>
+        <article class="stay">
+          <div class="stay-top"><h3><a href="https://www.tamarindvillage.com/en" target="_blank" rel="noopener">Tamarind Village</a></h3><span class="tag">Old City</span></div>
+          <div class="tag">One resort · inside the Old City walls, walking distance to the temples</div>
+          <div class="tiers">
+            <div class="tier"><small>Mid-range</small><b>Lanna room</b><span class="num">USD 140–200</span></div>
+            <div class="tier"><small>Premium</small><b>Lanna suite</b><span class="num">USD 230–300</span></div>
+          </div>
+          <div class="pros"><span>Walk out the gate to temples, markets and cafés</span><span>A quiet courtyard around a 200-year-old rain tree</span><span class="con">Smaller, so 20+ of us could fill it</span></div>
+        </article>
+      </div>
+      <article class="stay bkk">
+        <div class="stay-top"><h3>Bangkok: two hotels on the river</h3><span class="tag">3 nights · linked by the river shuttle boats</span></div>
+        <div class="tiers">
+          <div class="tier"><small>Mid-range</small><b><a href="https://www.chatrium.com/chatrium-hotel-riverside-bangkok" target="_blank" rel="noopener">Chatrium Hotel Riverside</a></b><span class="num">USD 130–185</span></div>
+          <div class="tier"><small>Premium</small><b><a href="https://www.avanihotels.com/en/riverside-bangkok" target="_blank" rel="noopener">Avani+ Riverside</a></b><span class="num">USD 170–260</span></div>
+        </div>
+        <div class="pros"><span>Both sit on the Chao Phraya with free shuttle boats to Sathorn pier, so meeting up for meals and the Christmas Eve cruise is easy</span><span>Chatrium's suites have separate bedrooms, which suits families</span><span class="con">Christmas week books out early</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="costs">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">What it costs</div>
+        <h2>Work out your own number</h2>
+        <p>Pick where you're flying from and how you'd like to stay. The figures are per person in USD, with NZD underneath. They're rough December estimates for economy return flights, rooms shared between two, plus food, activities, transfers and the Chiang Mai to Bangkok flight.</p>
+      </div>
+      <div class="calc">
+        <div class="calc-controls">
+          <div class="field">
+            <label for="c-origin">Flying from</label>
+            <select id="c-origin"></select>
+          </div>
+          <div class="field">
+            <span class="field-label" style="font-size:.85rem;font-weight:600">Accommodation</span>
+            <div class="seg" id="c-tier" role="group" aria-label="Accommodation tier">
+              <button type="button" data-v="mid" aria-pressed="true">Mid-range</button>
+              <button type="button" data-v="lux" aria-pressed="false">Premium</button>
+            </div>
+          </div>
+          <div class="field">
+            <span style="font-size:.85rem;font-weight:600">Room</span>
+            <div class="seg" id="c-share" role="group" aria-label="Room sharing">
+              <button type="button" data-v="2" aria-pressed="true">Sharing</button>
+              <button type="button" data-v="1" aria-pressed="false">On my own</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="total">
+            <span class="small">Estimated total per person, 10 nights</span>
+            <span class="big num" id="c-total">–</span>
+            <span class="usd num" id="c-usd">–</span>
+          </div>
+          <div class="bars" id="c-bars"></div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Flying from</th><th class="r">Return flight</th><th class="r">Mid-range total</th><th class="r">Premium total</th><th class="r">Mid-range in NZD</th></tr></thead>
+          <tbody id="cost-table"></tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top:12px">Totals use the middle of each range, with rooms shared between two. All figures in USD. Rate used: 1 USD = 1.72 NZD. Business class roughly triples the flight figure.</p>
+    </div>
+  </section>
+
+  <section id="survey">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Your answers</div>
+        <h2>Are you in? Tell us in two minutes.</h2>
+        <p>Everyone answers for themselves, because you'll each have your own ideas about where to stay and what to do. It takes two minutes, and you can come back and change it any time. Answers show up in the board on the right so everyone can see who's coming.</p>
+      </div>
+      <div class="survey">
+        <form id="f" novalidate>
+          <div class="row2">
+            <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" required autocomplete="name" placeholder="e.g. Michael"></div>
+            <div class="field"><label for="f-family">Which part of the family?</label>
+              <select id="f-family"><option value="">Choose…</option><option>Steven &amp; Pearl</option><option>Terry, Rodney &amp; family</option><option>Cheryl, Michael &amp; family</option><option>Reina, Darren &amp; family</option><option>Ember, James &amp; family</option><option>Other</option></select></div>
+          </div>
+          <fieldset><legend>Are you coming?</legend>
+            <div class="chips">
+              <label><input type="radio" name="status" value="Yes"> Yes, count us in</label>
+              <label><input type="radio" name="status" value="Maybe"> Maybe</label>
+              <label><input type="radio" name="status" value="No"> Not this time</label>
+            </div>
+          </fieldset>
+          <div class="row2">
+            <div class="field"><label for="f-count">How many people is this answer for? (just you is 1)</label><input id="f-count" type="number" min="0" max="20" inputmode="numeric" value="1" placeholder="1"></div>
+            <div class="field"><label for="f-from">Flying from</label><select id="f-from"></select></div>
+          </div>
+          <fieldset><legend>Where would you like to stay?</legend>
+            <div class="chips">
+              <label><input type="radio" name="tier" value="Mid-range"> Mid-range</label>
+              <label><input type="radio" name="tier" value="Premium"> Premium (up to USD 300)</label>
+              <label><input type="radio" name="tier" value="Either"> Either is fine</label>
+            </div>
+          </fieldset>
+          <fieldset><legend>Joining the Bangkok leg for Christmas?</legend>
+            <div class="chips">
+              <label><input type="radio" name="bkk" value="Yes"> Yes</label>
+              <label><input type="radio" name="bkk" value="No"> Chiang Mai only</label>
+              <label><input type="radio" name="bkk" value="Not sure"> Not sure</label>
+            </div>
+          </fieldset>
+          <fieldset><legend>How flexible are your dates?</legend>
+            <div class="chips">
+              <label><input type="radio" name="flex" value="Only these dates"> Only these dates</label>
+              <label><input type="radio" name="flex" value="Can shift a week"> Can shift a week</label>
+              <label><input type="radio" name="flex" value="Could stay longer"> Could stay longer</label>
+            </div>
+          </fieldset>
+          <fieldset><legend>What would you love to do? (pick any)</legend>
+            <div class="chips" id="f-acts"></div>
+          </fieldset>
+          <div class="field"><label for="f-notes">Anything else? (dietary needs, budget, ideas) Only Steven sees this.</label><textarea id="f-notes"></textarea></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary" type="submit" id="f-submit">Save my answers</button>
+            <button class="btn btn-ghost" type="button" id="f-copy" style="color:var(--jungle)">Copy my answers</button>
+          </div>
+          <div id="f-msg" class="msg" hidden></div>
+          <div id="f-copybox" class="copybox" hidden></div>
+        </form>
+        <div class="board">
+          <div class="tally">
+            <div><b class="num" id="t-yes">0</b><span>people coming</span></div>
+            <div><b class="num" id="t-maybe">0</b><span>maybes</span></div>
+            <div><b class="num" id="t-fam">0</b><span>answers in</span></div>
+          </div>
+          <div id="board-list"><div class="empty">No answers yet. Yours will be the first to show up here.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>About these numbers.</b> Everything here is a planning estimate made in October 2026, more than a year out. Flight and hotel prices for late December 2027 aren't released yet, and Christmas week is peak season. We'll firm things up once the race date is announced and we know who's coming.
+    <ul>
+      <li>Race: <a href="https://www.chiangmaimarathon.com/" target="_blank" rel="noopener">Chiang Mai Marathon official site</a></li>
+      <li>Resort rates: hotel booking sites, October 2026, scaled up for Christmas peak</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const FX = 0.58; // USD per NZD
+const ORIGINS = [
+  { id: "akl", name: "Auckland", fl: [1600, 2300] },
+  { id: "syd", name: "Sydney", fl: [1300, 1900] },
+  { id: "hnl", name: "Hawaii (Honolulu)", fl: [2250, 3450] },
+  { id: "lax", name: "California (LA / SF)", fl: [1900, 2950] },
+  { id: "md",  name: "Maryland (BWI / IAD)", fl: [2400, 3800] },
+  { id: "oth", name: "Somewhere else", fl: [1800, 3000] },
+];
+// Per room per night, NZD, middle of the range. 7 nights Chiang Mai, 3 nights Bangkok.
+const ROOM = { mid: { cm: 240, bk: 270 }, lux: { cm: 470, bk: 370 } }; // = USD ~140/155 and ~270/215
+const GROUND = { mid: 120, lux: 170 }; // per person per day: food, activities, transfers
+const DOMESTIC = 120; // CNX to BKK one way
+const ACTS = ["Cooking class", "Elephant sanctuary", "Temples", "Spa and massage", "Night markets", "Doi Inthanon", "White Temple day trip", "Christmas Eve cruise", "Beach add-on"];
+
+const fmt = (n, cur) => cur + " " + (Math.round(n / 10) * 10).toLocaleString("en-NZ");
+const mid = r => (r[0] + r[1]) / 2;
+
+function cost(o, tier, share) {
+  const flight = mid(o.fl);
+  const stay = (ROOM[tier].cm * 7 + ROOM[tier].bk * 3) / share;
+  const ground = GROUND[tier] * 10 + DOMESTIC;
+  return { flight, stay, ground, total: flight + stay + ground };
+}
+
+const state = { origin: "akl", tier: "mid", share: 2 };
+const oSel = document.getElementById("c-origin");
+const fFrom = document.getElementById("f-from");
+fFrom.innerHTML = '<option value="">Choose…</option>';
+ORIGINS.forEach(o => { oSel.add(new Option(o.name, o.id)); fFrom.add(new Option(o.name, o.name)); });
+oSel.addEventListener("change", () => { state.origin = oSel.value; renderCalc(); });
+function seg(id, key, cast) {
+  const el = document.getElementById(id);
+  el.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    el.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    state[key] = cast(b.dataset.v); renderCalc();
+  });
+}
+seg("c-tier", "tier", String); seg("c-share", "share", Number);
+
+function renderCalc() {
+  const o = ORIGINS.find(x => x.id === state.origin);
+  const c = cost(o, state.tier, state.share);
+  document.getElementById("c-total").textContent = fmt(c.total * FX, "USD");
+  document.getElementById("c-usd").textContent = "about " + fmt(c.total, "NZD");
+  const parts = [["Flights", c.flight, "var(--jungle)"], ["Accommodation", c.stay, "var(--marigold)"], ["Food and fun", c.ground, "var(--muted)"]];
+  const max = Math.max(...parts.map(p => p[1]));
+  document.getElementById("c-bars").innerHTML = parts.map(([l, v, col]) =>
+    `<div class="bar-row"><span>${l}</span><div class="bar-track"><div class="bar-fill" style="width:${(v / max * 100).toFixed(1)}%;background:${col}"></div></div><span class="num">${fmt(v * FX, "USD")}</span></div>`).join("");
+}
+document.getElementById("cost-table").innerHTML = ORIGINS.filter(o => o.id !== "oth").map(o => {
+  const m = cost(o, "mid", 2), l = cost(o, "lux", 2);
+  return `<tr><td>${o.name}</td><td class="num">${fmt(o.fl[0] * FX, "USD")}–${(Math.round(o.fl[1] * FX / 10) * 10).toLocaleString("en-NZ")}</td><td class="num">${fmt(m.total * FX, "USD")}</td><td class="num">${fmt(l.total * FX, "USD")}</td><td class="num">${fmt(m.total, "NZD")}</td></tr>`;
+}).join("");
+renderCalc();
+
+// Activities chips
+document.getElementById("f-acts").innerHTML = ACTS.map((a, i) => `<label><input type="checkbox" name="acts" id="act-${i}" value="${a}"> ${a}</label>`).join("");
+
+// Survey
+const form = document.getElementById("f");
+const msg = document.getElementById("f-msg");
+const copybox = document.getElementById("f-copybox");
+function show(text, kind) { msg.hidden = false; msg.className = "msg " + kind; msg.textContent = text; }
+function radio(name) { const r = form.querySelector(`input[name=${name}]:checked`); return r ? r.value : ""; }
+function setRadio(name, v) { form.querySelectorAll(`input[name=${name}]`).forEach(r => r.checked = r.value === v); }
+function collect() {
+  return {
+    name: document.getElementById("f-name").value.trim(),
+    family: document.getElementById("f-family").value,
+    status: radio("status"),
+    count: Number(document.getElementById("f-count").value) || 0,
+    from: fFrom.value,
+    tier: radio("tier"),
+    bangkok: radio("bkk"),
+    flex: radio("flex"),
+    activities: [...form.querySelectorAll("input[name=acts]:checked")].map(x => x.value),
+    notes: document.getElementById("f-notes").value.trim(),
+    updatedAt: new Date().toISOString(),
+  };
+}
+function fill(d) {
+  document.getElementById("f-name").value = d.name || "";
+  document.getElementById("f-family").value = d.family || "";
+  document.getElementById("f-count").value = d.count || "";
+  fFrom.value = d.from || "";
+  setRadio("status", d.status); setRadio("tier", d.tier); setRadio("bkk", d.bangkok); setRadio("flex", d.flex);
+  form.querySelectorAll("input[name=acts]").forEach(x => x.checked = (d.activities || []).includes(x.value));
+  document.getElementById("f-notes").value = d.notes || "";
+}
+function asText(d) {
+  return [`Thailand 2027 – answers from ${d.name || "?"} (${d.family || "family not given"})`,
+    `Coming: ${d.status || "-"}`, `How many: ${d.count || "-"}`, `Flying from: ${d.from || "-"}`,
+    `Stay: ${d.tier || "-"}`, `Bangkok leg: ${d.bangkok || "-"}`, `Dates: ${d.flex || "-"}`,
+    `Would love: ${d.activities.join(", ") || "-"}`, `Notes: ${d.notes || "-"}`].join("\n");
+}
+document.getElementById("f-copy").addEventListener("click", async () => {
+  const t = asText(collect());
+  copybox.hidden = false; copybox.textContent = t;
+  try { await navigator.clipboard.writeText(t); show("Copied. Paste it into the family chat or a message to Steven.", "ok"); }
+  catch { const r = document.createRange(); r.selectNodeContents(copybox); const s = getSelection(); s.removeAllRanges(); s.addRange(r); show("Your answers are selected below. Copy them and send them to Steven.", "info"); }
+});
+
+// ---- Google Form + Sheet wiring (fill these in) ----
+const CONFIG = {
+  formAction: "", // https://docs.google.com/forms/d/e/<id>/formResponse
+  entries: { name: "", family: "", status: "", count: "", from: "", tier: "", bangkok: "", flex: "", activities: "", notes: "" },
+  boardCsv: "",   // published CSV of the Board tab
+};
+// Page answers -> exact option text in the Google Form
+const FORM_TEXT = {
+  status: { Yes: "Yes, count me in", Maybe: "Maybe", No: "Not this time" },
+  tier: { "Mid-range": "Mid-range", Premium: "Premium (up to US$300)", Either: "Either is fine" },
+  bangkok: { Yes: "Yes", No: "Chiang Mai only", "Not sure": "Not sure" },
+  from: { "Auckland": "Auckland", "Sydney": "Sydney", "Hawaii (Honolulu)": "Hawaii", "California (LA / SF)": "California", "Maryland (BWI / IAD)": "Maryland", "Somewhere else": "Somewhere else" },
+};
+const ready = () => CONFIG.formAction && CONFIG.entries.name;
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const d = collect();
+  if (!d.name || !d.status) { show("Please add your name and whether you're coming.", "info"); return; }
+  if (!ready()) { show("Saving isn't switched on yet. Tap Copy my answers and send them to Steven.", "info"); return; }
+  const body = new URLSearchParams();
+  const put = (k, v) => { if (CONFIG.entries[k] && v !== "" && v != null) body.append(CONFIG.entries[k], v); };
+  put("name", d.name); put("family", d.family);
+  put("status", FORM_TEXT.status[d.status] || d.status);
+  put("count", String(d.count || 1));
+  put("from", FORM_TEXT.from[d.from] || d.from);
+  put("tier", FORM_TEXT.tier[d.tier] || d.tier);
+  put("bangkok", FORM_TEXT.bangkok[d.bangkok] || d.bangkok);
+  put("flex", d.flex);
+  d.activities.forEach(a => put("activities", a));
+  put("notes", d.notes);
+  const btn = document.getElementById("f-submit"); btn.disabled = true;
+  try {
+    await fetch(CONFIG.formAction, { method: "POST", mode: "no-cors", body });
+    show("Saved. Thanks! You'll pop up on the board in a few minutes. Changed your mind? Just send it again and Steven will use your latest answer.", "ok");
+    try { localStorage.setItem("tt27-answers", JSON.stringify(d)); } catch {}
+  } catch {
+    show("That didn't go through. Check your connection and try again, or tap Copy my answers and send them to Steven.", "info");
+  } finally { btn.disabled = false; }
+});
+try { const saved = JSON.parse(localStorage.getItem("tt27-answers") || "null"); if (saved) fill(saved); } catch {}
+
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function parseCsv(t) {
+  const rows = []; let row = [], f = "", q = false;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(f); f = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; }
+    else f += c;
+  }
+  if (f || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+const statusKey = s => /^yes/i.test(s) ? "yes" : /^maybe/i.test(s) ? "maybe" : "no";
+function renderBoard(rows) {
+  const sum = k => rows.filter(r => statusKey(r.status) === k).reduce((a, r) => a + (Number(r.count) || 1), 0);
+  document.getElementById("t-yes").textContent = sum("yes");
+  document.getElementById("t-maybe").textContent = sum("maybe");
+  document.getElementById("t-fam").textContent = rows.length;
+  const list = document.getElementById("board-list");
+  if (!rows.length) { list.innerHTML = '<div class="empty">No answers yet. Yours will be the first to show up here.</div>'; return; }
+  const order = { yes: 0, maybe: 1, no: 2 };
+  rows.sort((a, b) => order[statusKey(a.status)] - order[statusKey(b.status)]);
+  list.innerHTML = `<div class="table-wrap" style="margin-top:0"><table><thead><tr><th>Who</th><th>Coming</th><th class="r">People</th><th>From</th></tr></thead><tbody>${
+    rows.map(r => `<tr><td><b>${esc(r.name)}</b><br><span class="small">${esc(r.family)}</span></td><td><span class="pill ${statusKey(r.status)}">${esc(statusKey(r.status) === "yes" ? "Yes" : statusKey(r.status) === "maybe" ? "Maybe" : "Not this time")}</span></td><td class="num">${esc(r.count || 1)}</td><td>${esc(r.from)}</td></tr>`).join("")
+  }</tbody></table></div>`;
+}
+async function loadBoard() {
+  if (!CONFIG.boardCsv) return;
+  try {
+    const res = await fetch(CONFIG.boardCsv + (CONFIG.boardCsv.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+    const [head, ...data] = parseCsv(await res.text());
+    const rows = data.filter(r => r.some(x => x.trim())).map(r => ({
+      name: (r[0] || "").trim().split(/\s+/)[0], family: r[1], status: r[2] || "", count: r[3], from: r[4],
+    })).filter(r => r.name);
+    renderBoard(rows);
+  } catch {}
+}
+loadBoard(); setInterval(loadBoard, 120000);
+
+// Lantern sky
+(() => {
+  const cv = document.getElementById("lanterns"), ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, L = [];
+  function size() {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(W / 38);
+    L = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, s: 4 + Math.random() * 9, v: .15 + Math.random() * .35, p: Math.random() * 6.28 }));
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (const l of L) {
+      const a = .25 + .2 * Math.sin(t / 900 + l.p) + (l.x > W * .45 ? .25 : 0);
+      const g = ctx.createRadialGradient(l.x, l.y, 0, l.x, l.y, l.s * 3);
+      g.addColorStop(0, `rgba(255,190,90,${a})`); g.addColorStop(1, "rgba(255,150,40,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(l.x, l.y, l.s * 3, 0, 6.28); ctx.fill();
+      ctx.fillStyle = `rgba(255,214,140,${Math.min(1, a + .3)})`;
+      ctx.beginPath(); ctx.ellipse(l.x, l.y, l.s * .55, l.s * .75, 0, 0, 6.28); ctx.fill();
+      if (!reduce) { l.y -= l.v; l.x += Math.sin(t / 2000 + l.p) * .15; if (l.y < -20) { l.y = H + 20; l.x = Math.random() * W; } }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); addEventListener("resize", size); requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
