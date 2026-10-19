@@ -540,7 +540,7 @@ document.getElementById("f-copy").addEventListener("click", async () => {
 });
 
 // ---- Google Sheet wiring: paste the Apps Script web app URL here ----
-const ENDPOINT = "";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzbuSYz0ncH6c5xLTh9dimVZDu71KuLUdg0JGpq1c-lfYs8wHR3JuVppjlQsx2tdcQO/exec";
 const ready = () => !!ENDPOINT;
 let myId = "";
 try { myId = localStorage.getItem("tt27-id") || ""; if (!myId) { myId = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem("tt27-id", myId); } } catch { myId = Math.random().toString(36).slice(2); }
