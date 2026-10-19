@@ -366,11 +366,8 @@ footer a { color: var(--jungle); }
       </div>
       <div class="survey">
         <form id="f" novalidate>
-          <div class="row2">
+          
             <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" required autocomplete="name" placeholder="e.g. Michael"></div>
-            <div class="field"><label for="f-family">Which part of the family?</label>
-              <select id="f-family"><option value="">Choose…</option><option>Steven &amp; Pearl</option><option>Terry, Rodney &amp; family</option><option>Cheryl, Michael &amp; family</option><option>Reina, Darren &amp; family</option><option>Ember, James &amp; family</option><option>Other</option></select></div>
-          </div>
           <fieldset><legend>Are you coming?</legend>
             <div class="chips">
               <label><input type="radio" name="status" value="Yes"> Yes, count us in</label>
@@ -508,7 +505,7 @@ function setRadio(name, v) { form.querySelectorAll(`input[name=${name}]`).forEac
 function collect() {
   return {
     name: document.getElementById("f-name").value.trim(),
-    family: document.getElementById("f-family").value,
+    
     status: radio("status"),
     count: Number(document.getElementById("f-count").value) || 0,
     from: fFrom.value,
@@ -522,7 +519,7 @@ function collect() {
 }
 function fill(d) {
   document.getElementById("f-name").value = d.name || "";
-  document.getElementById("f-family").value = d.family || "";
+  
   document.getElementById("f-count").value = d.count || "";
   fFrom.value = d.from || "";
   setRadio("status", d.status); setRadio("tier", d.tier); setRadio("bkk", d.bangkok); setRadio("flex", d.flex);
@@ -530,7 +527,7 @@ function fill(d) {
   document.getElementById("f-notes").value = d.notes || "";
 }
 function asText(d) {
-  return [`Thailand 2027 – answers from ${d.name || "?"} (${d.family || "family not given"})`,
+  return [`Thailand 2027 – answers from ${d.name || "?"}`,
     `Coming: ${d.status || "-"}`, `How many: ${d.count || "-"}`, `Flying from: ${d.from || "-"}`,
     `Stay: ${d.tier || "-"}`, `Bangkok leg: ${d.bangkok || "-"}`, `Dates: ${d.flex || "-"}`,
     `Would love: ${d.activities.join(", ") || "-"}`, `Notes: ${d.notes || "-"}`].join("\n");
@@ -545,7 +542,7 @@ document.getElementById("f-copy").addEventListener("click", async () => {
 // ---- Google Form + Sheet wiring (fill these in) ----
 const CONFIG = {
   formAction: "", // https://docs.google.com/forms/d/e/<id>/formResponse
-  entries: { name: "", family: "", status: "", count: "", from: "", tier: "", bangkok: "", flex: "", activities: "", notes: "" },
+  entries: { name: "", status: "", count: "", from: "", tier: "", bangkok: "", flex: "", activities: "", notes: "" },
   boardCsv: "",   // published CSV of the Board tab
 };
 // Page answers -> exact option text in the Google Form
@@ -564,7 +561,7 @@ form.addEventListener("submit", async e => {
   if (!ready()) { show("Saving isn't switched on yet. Tap Copy my answers and send them to Steven.", "info"); return; }
   const body = new URLSearchParams();
   const put = (k, v) => { if (CONFIG.entries[k] && v !== "" && v != null) body.append(CONFIG.entries[k], v); };
-  put("name", d.name); put("family", d.family);
+  put("name", d.name);
   put("status", FORM_TEXT.status[d.status] || d.status);
   put("count", String(d.count || 1));
   put("from", FORM_TEXT.from[d.from] || d.from);
@@ -609,7 +606,7 @@ function renderBoard(rows) {
   const order = { yes: 0, maybe: 1, no: 2 };
   rows.sort((a, b) => order[statusKey(a.status)] - order[statusKey(b.status)]);
   list.innerHTML = `<div class="table-wrap" style="margin-top:0"><table><thead><tr><th>Who</th><th>Coming</th><th class="r">People</th><th>From</th></tr></thead><tbody>${
-    rows.map(r => `<tr><td><b>${esc(r.name)}</b><br><span class="small">${esc(r.family)}</span></td><td><span class="pill ${statusKey(r.status)}">${esc(statusKey(r.status) === "yes" ? "Yes" : statusKey(r.status) === "maybe" ? "Maybe" : "Not this time")}</span></td><td class="num">${esc(r.count || 1)}</td><td>${esc(r.from)}</td></tr>`).join("")
+    rows.map(r => `<tr><td><b>${esc(r.name)}</b></td><td><span class="pill ${statusKey(r.status)}">${esc(statusKey(r.status) === "yes" ? "Yes" : statusKey(r.status) === "maybe" ? "Maybe" : "Not this time")}</span></td><td class="num">${esc(r.count || 1)}</td><td>${esc(r.from)}</td></tr>`).join("")
   }</tbody></table></div>`;
 }
 async function loadBoard() {
@@ -618,7 +615,7 @@ async function loadBoard() {
     const res = await fetch(CONFIG.boardCsv + (CONFIG.boardCsv.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
     const [head, ...data] = parseCsv(await res.text());
     const rows = data.filter(r => r.some(x => x.trim())).map(r => ({
-      name: (r[0] || "").trim().split(/\s+/)[0], family: r[1], status: r[2] || "", count: r[3], from: r[4],
+      name: (r[0] || "").trim().split(/\s+/)[0], status: r[1] || "", count: r[2], from: r[3],
     })).filter(r => r.name);
     renderBoard(rows);
   } catch {}
